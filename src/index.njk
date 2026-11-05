@@ -1,0 +1,45 @@
+---
+layout: base.njk
+key: home
+permalink: index.html
+---
+{%- set d = cms.home -%}{%- set s = cms.site -%}
+<section class="hero"><div class="hero-bg" style="background:url({{ d.hero_image | pub }}) center/cover"></div><div class="wrap">
+<div class="hero-tag"><i></i>{{ d.hero_tag }}</div>
+<h1>{{ d.hero_title_a }}<em>{{ d.hero_title_em }}</em>{{ d.hero_title_b }}</h1>
+<p class="sub">{{ d.hero_sub }}</p>
+<div class="hero-actions"><a href="#contact" class="btn btn-lime">無料相談・お見積り<span class="arr">→</span></a><a href="#about" class="btn btn-ghost">会社について見る</a></div></div>
+<div class="hero-corp">IWASAKI × HOUSING HIMI</div><div class="scroll"></div></section>
+
+<div class="ribbon"><div class="wrap">{% for r in d.ribbon %}<div class="rb"><b>{{ r.num }}</b><span>{{ r.label }}</span></div>{% endfor %}</div></div>
+
+<section class="sec" id="about"><div class="wrap about-grid">
+<div class="rv"><div class="label">{{ d.about_label }}</div><h2 class="title">{{ d.about_title | br | safe }}</h2>
+<p>{{ d.about_text }}</p>
+<a href="company.html" class="tlink">{{ d.about_link }}</a></div>
+<div class="about-img rv d1">{% img d.about_image, d.about_alt %}<div class="chip"><small>{{ d.about_chip_small }}</small>{{ d.about_chip }}</div></div></div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap">
+<div class="svc-head rv"><div><div class="label">{{ d.services_label }}</div><h2 class="title" style="margin:0">{{ d.services_title }}</h2></div><p class="lead">{{ d.services_lead }}</p></div>
+<div class="bento">
+{%- set hrefs = ["shinchiku.html", "reform.html", "services.html#kaitai", "services.html#shiroari"] -%}
+{%- set extra = ["", " d1", "", " d1"] -%}
+{% for c in d.cards %}<a href="{{ hrefs[loop.index0] }}" class="bc b{{ loop.index }}{% if loop.index == 4 %} white-bg{% endif %} rv{{ extra[loop.index0] }}">{% img c.image, c.alt %}<div class="tx"><span class="no">0{{ loop.index }}</span><h3>{{ c.title }}</h3><p>{{ c.text }}</p><span class="go">{{ c.go }}</span></div></a>
+{% endfor %}</div>
+<div class="inos rv" id="inos">{% img d.inos_image, d.inos_alt %}<div class="tx"><div class="label" style="color:var(--lime)">{{ d.inos_label }}</div><h3>{{ d.inos_title }}</h3><p>{{ d.inos_text }}</p><a href="{{ s.inos_url }}" target="_blank" rel="noopener" class="btn btn-lime">{{ d.inos_button }}<span class="vh">（新しいタブで開きます）</span></a></div></div>
+</div></section>
+
+<section class="sec contact on-dark" id="contact"><div class="wrap">
+<div class="rv"><div class="label">{{ d.contact_label }}</div><h2 class="title">{{ d.contact_title }}</h2><p class="lead">{{ d.contact_lead }}</p></div>
+<div class="contact-grid"><div class="rv"><div class="addr">〒{{ s.zip }}<br>{{ s.address }}</div>
+<div class="tel-card"><h3>{{ s.tel1_label }}</h3><div><div class="num"><a href="tel:{{ s.tel1 | replace('-', '') }}">TEL {{ s.tel1 }}</a></div><small>FAX {{ s.fax1 }}</small></div></div>
+<div class="tel-card"><h3>{{ s.tel2_label }}</h3><div><div class="num"><a href="tel:{{ s.tel2 | replace('-', '') }}">TEL {{ s.tel2 }}</a></div><small>FAX {{ s.fax2 }}</small></div></div>
+<div class="map"><iframe src="https://www.google.com/maps?q=有限会社イワサキ住建+{{ s.address }}&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="{{ s.name }} 地図"></iframe></div></div>
+<div class="form rv d1"><form id="cform" action="{{ s.form_action }}" method="post">
+<div class="frow"><div class="fg"><label for="name">名前<span class="req">必須</span></label><input type="text" id="name" name="お名前" class="fc" required placeholder="山田 太郎" autocomplete="name"></div>
+<div class="fg"><label for="phone">電話番号</label><input type="tel" id="phone" name="電話番号" class="fc" autocomplete="tel" inputmode="tel" placeholder="090-0000-0000"></div></div>
+<div class="fg"><label for="email">メールアドレス<span class="req">必須</span></label><input type="email" id="email" name="メールアドレス" class="fc" required placeholder="example@domain.com" autocomplete="email" inputmode="email"></div>
+<div class="fg"><label for="address">住所</label><input type="text" id="address" name="住所" class="fc" autocomplete="street-address" placeholder="富山県氷見市..."></div>
+<div class="fg"><label for="topic">ご相談内容</label><select id="topic" name="ご相談内容" class="fc"><option value="">選択してください</option><option>新築（イノスの家）</option><option>リフォーム</option><option>解体・不動産登記</option><option>白蟻調査・対策</option><option>外構工事</option><option>その他</option></select></div>
+<div class="fg"><label for="message">メッセージ</label><textarea id="message" name="メッセージ" class="fc" placeholder="例：築30年の実家の水まわりをリフォームしたい／空き家の解体を考えている など"></textarea></div>
+<p class="fnote">お急ぎの方はお電話（<a href="tel:{{ s.tel1 | replace('-', '') }}">{{ s.tel1 }}</a>）でもご相談いただけます。いただいた個人情報はご返信の目的にのみ使用します。</p><button type="submit" class="btn btn-lime">この内容で相談する<span class="arr">→</span></button></form></div></div></div></section>

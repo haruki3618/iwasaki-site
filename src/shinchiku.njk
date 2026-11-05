@@ -1,0 +1,14 @@
+---
+layout: base.njk
+key: shinchiku
+topic: 新築（イノスの家）
+permalink: shinchiku.html
+---
+{%- set d = cms.shinchiku -%}{%- set s = cms.site -%}{%- set cta_topic = "新築（イノスの家）" -%}{%- set cta_btn = "無料相談・お見積りはこちら" -%}
+{% include "phero.njk" %}<section class="sec"><div class="wrap">
+<div class="dr"><div class="dr-img rv">{% img d.intro_image, d.intro_alt %}</div><div class="rv d1"><div class="label">{{ d.intro_label }}</div><h2>{{ d.intro_title }}</h2><p>{{ d.intro_text }}</p><ul class="checks">{% for c in d.intro_checks %}<li>{{ c }}</li>{% endfor %}</ul><div style="margin-top:28px"><a href="{{ s.inos_url }}" target="_blank" rel="noopener" class="btn btn-dark">{{ d.intro_button }}<span class="vh">（新しいタブで開きます）</span></a></div></div></div>
+<div class="rv" style="margin-top:120px"><div class="label">{{ d.gallery_label }}</div><h2 class="title">{{ d.gallery_title }}</h2><p class="lead">{{ d.gallery_lead }}</p></div>
+<div class="gal">{% for g in d.gallery %}<div class="rv d{{ (loop.index0 % 3) + 1 }}">{% img g.image, g.alt %}</div>{% endfor %}</div>
+<div class="rv" style="margin-top:120px"><div class="label">{{ d.steps_label }}</div><h2 class="title">{{ d.steps_title }}</h2><p class="lead">{{ d.steps_lead }}</p></div>
+<div class="steps">{% for st in d.steps %}<div class="step rv{% if loop.index0 %} d{{ loop.index0 }}{% endif %}"><h3>{{ st.title }}</h3><p>{{ st.text }}</p></div>{% endfor %}</div>
+{% include "cta.njk" %}</div></section>

@@ -1,0 +1,1 @@
+<div class="cta rv"><div><h3>{{ d.cta_title }}</h3><p>{{ d.cta_text }}</p></div><div class="cta-act"><a href="index.html{% if cta_topic %}?topic={{ cta_topic | urlenc }}{% endif %}#contact" class="btn btn-lime">{{ cta_btn }}<span class="arr">→</span></a><a href="tel:{{ s.tel1 | replace('-', '') }}" class="btn btn-ghost">電話で相談　{{ s.tel1 }}</a></div></div>
