@@ -130,3 +130,4 @@ Cloudflare の「Settings」→「Domains & Routes」から設定できます（
 トップページ（①〜⑤）と送信完了ページは、管理画面の右側にプレビューが出ます（`src/admin/preview.js` と `preview.css`）。
 プレビューが崩れても、編集と公開には影響しません。トップページに項目を足したときは、`preview.js` の該当の関数にも足してください。
 プレビューで Google Fonts を読むため、管理画面の CSP（`src/_headers.njk`）に `fonts.googleapis.com` / `fonts.gstatic.com` を許可しています。
+管理画面の Decap CMS は、設定ファイルの検査で文字列を実行する仕組み（eval）を使います。そのため、管理画面の CSP（`/admin/*`）の `script-src` にだけ `'unsafe-eval'` を入れています（入れないと「Error loading the CMS configuration / EvalError」で開けません）。公開サイト（`/*`）には付けません。`npm run headers:check` も、この前提で検査します。

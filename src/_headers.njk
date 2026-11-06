@@ -5,6 +5,7 @@ eleventyExcludeFromCollections: true
 # セキュリティヘッダー（Cloudflare が配信時に付けます。出力は _site/_headers）
 # 1つ目の /* がサイト全体、2つ目の /admin/* が管理画面。同じヘッダーが重なると
 # 値が連結されてしまう（CSP は両方が適用される）ので、/admin/* では先に「! ヘッダー名」で取り消してから付け直しています
+# 管理画面（Decap CMS）は、設定の検査で文字列を実行する仕組み（eval）を使うため、/admin/* の script-src にだけ 'unsafe-eval' が必要です（公開サイト側には付けません）
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
@@ -27,4 +28,4 @@ eleventyExcludeFromCollections: true
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' {{ csp.adminScriptSrc | safe }}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' {{ csp.adminScriptSrc | safe }}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
