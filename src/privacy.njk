@@ -1,0 +1,10 @@
+---
+layout: base.njk
+key: privacy
+permalink: privacy.html
+---
+{%- set d = cms.privacy -%}{%- set s = cms.site -%}
+{% include "phero.njk" %}<section class="sec"><div class="wrap"><div class="prose rv"><p class="prose-lead">{{ s.legal_name or s.name }}（以下「当社」）は、{{ d.intro }}</p>
+{% for sec in d.sections %}<h2>{{ sec.title }}</h2><p>{{ sec.text | br | safe }}</p>
+{% endfor %}<h2>個人情報に関するお問い合わせ窓口</h2><p>{{ s.legal_name or s.name }}<br>〒{{ s.zip }}　{{ s.address }}<br>TEL <a href="tel:{{ s.tel1 | replace('-', '') }}">{{ s.tel1 }}</a></p>
+<p class="prose-date">{{ d.updated }}</p></div></div></section>

@@ -1,0 +1,26 @@
+[
+  {
+    "key": "shinchiku",
+    "label": "新築（イノスの家）"
+  },
+  {
+    "key": "reform",
+    "label": "リフォーム"
+  },
+  {
+    "key": "kaitai",
+    "label": "解体・不動産登記"
+  },
+  {
+    "key": "shiroari",
+    "label": "白蟻調査・対策"
+  },
+  {
+    "key": "exterior",
+    "label": "外構工事"
+  },
+  {
+    "key": "other",
+    "label": "その他"
+  }
+]

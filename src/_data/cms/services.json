@@ -8,7 +8,7 @@
   "hero_lead": "新築・リフォームだけでなく、住まいの維持や整理に関わる工事もまとめてご相談いただけます。",
   "blocks": [
     {
-      "anchor": "kaitai", "topic": "解体・不動産登記", "contain": false,
+      "anchor": "kaitai", "topic": "kaitai", "contain": false,
       "image": "/images/kaitai.avif", "alt": "解体作業の様子",
       "label": "解体処理・不動産登記等", "title": "家屋から物置まで、幅広く対応",
       "paragraphs": [
@@ -19,7 +19,7 @@
       "link": "解体・登記について相談する →"
     },
     {
-      "anchor": "shiroari", "topic": "白蟻調査・対策", "contain": true,
+      "anchor": "shiroari", "topic": "shiroari", "contain": true,
       "image": "/images/siroari.avif", "alt": "白蟻調査・駆除",
       "label": "白蟻調査・白蟻駆除・床下改修", "title": "調査・お見積りは無料です",
       "paragraphs": ["白蟻の種類や被害状況に適した対処で、確実に駆除いたします。床下の改修まで一貫して対応可能です。"],
@@ -27,7 +27,7 @@
       "link": "白蟻調査（無料）を相談する →"
     },
     {
-      "anchor": "exterior", "topic": "外構工事", "contain": false,
+      "anchor": "exterior", "topic": "exterior", "contain": false,
       "image": "/images/gaikouekusuteria.avif", "alt": "ウッドデッキのテラスと植栽の外構",
       "label": "外構エクステリア工事", "title": "お庭まわりの施工・メンテナンス",
       "paragraphs": ["フェンスやウッドデッキ、カーポートの新設から、土間コンクリート・アスファルト舗装、庭園工事や庭木の剪定まで、お庭まわりの各種施工・メンテナンスをお任せください。"],

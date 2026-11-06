@@ -2,6 +2,29 @@
 permalink: _headers
 eleventyExcludeFromCollections: true
 ---
+# セキュリティヘッダー（Cloudflare が配信時に付けます。出力は _site/_headers）
+# 1つ目の /* がサイト全体、2つ目の /admin/* が管理画面。同じヘッダーが重なると
+# 値が連結されてしまう（CSP は両方が適用される）ので、/admin/* では先に「! ヘッダー名」で取り消してから付け直しています
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=()
+  Strict-Transport-Security: max-age=31536000
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' {{ csp.jsFlagHash | safe }}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-src https://www.google.com https://maps.google.com; form-action 'self' {{ cms.site.form_action | origin | safe }}; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
 /admin/*
+  ! X-Frame-Options
+  ! X-Content-Type-Options
+  ! Referrer-Policy
+  ! Permissions-Policy
+  ! Content-Security-Policy
+  ! Cross-Origin-Opener-Policy
   X-Robots-Tag: noindex
   Cache-Control: no-store
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' {{ csp.adminScriptSrc | safe }}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'

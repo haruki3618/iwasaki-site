@@ -1,0 +1,28 @@
+name: health
+
+# 公開中のサイトが動いているかを、毎日確認します（scripts/health-check.js）。
+# 失敗すると、GitHub から失敗の通知メールが届きます。
+# ※ フォームの「実際の送信」は確認しません。月1回のテスト送信は人の手で行います（form-test-reminder.yml がお知らせを出します）。
+
+on:
+  schedule:
+    - cron: "0 21 * * *" # 毎日 06:00（日本時間）
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      # 一瞬の通信エラーで失敗の通知が来ないように、失敗したら1分おいて、もう1回だけやり直す
+      - name: サイトの確認
+        run: npm run health || (sleep 60 && npm run health)

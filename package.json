@@ -3,16 +3,24 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "eleventy",
-    "start": "eleventy --serve"
+    "build": "node scripts/validate-content.js && node scripts/sri.js --build && eleventy",
+    "start": "eleventy --serve",
+    "sri": "node scripts/sri.js",
+    "sri:check": "node scripts/sri.js --check",
+    "audit": "npm audit --audit-level=high",
+    "headers:check": "node scripts/check-headers.js",
+    "validate": "node scripts/validate-content.js",
+    "health": "node scripts/health-check.js",
+    "set-domain": "node scripts/set-domain.js"
   },
   "engines": {
     "node": ">=20"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.8",
-    "image-size": "^2.0.4",
-    "sharp": "^0.35.5",
-    "wrangler": "^4.158.0"
+    "@11ty/eleventy": "3.1.8",
+    "image-size": "2.0.4",
+    "js-yaml": "4.3.2",
+    "sharp": "0.35.5",
+    "wrangler": "4.158.0"
   }
 }

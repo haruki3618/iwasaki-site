@@ -1,0 +1,19 @@
+# 依存パッケージの更新（セキュリティ修正を含む）を、毎週 Pull Request で知らせます。
+# package.json はバージョンを固定しているため、これがないと更新に気づけません。
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: Asia/Tokyo
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

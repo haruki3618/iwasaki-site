@@ -1,0 +1,30 @@
+name: form-test-reminder
+
+# 毎月1日に、「お問い合わせフォームのテスト送信」のお知らせを Issue として作ります（チェックリスト付き）。
+# フォームが静かに壊れても、サイト側からは気づけないため、月1回は人が実際に送って確かめます。
+
+on:
+  schedule:
+    - cron: "0 0 1 * *" # 毎月1日 09:00（日本時間）
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: 今月のお知らせ（Issue）を作る
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="【毎月】お問い合わせフォームのテスト送信（$(TZ=Asia/Tokyo date +%Y年%-m月)）"
+          # リポジトリの持ち主を担当にして、通知が届くようにする。担当にできないときは、担当なしで作る
+          gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body-file .github/form-test-checklist.md --assignee "$GITHUB_REPOSITORY_OWNER" \
+            || gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body-file .github/form-test-checklist.md

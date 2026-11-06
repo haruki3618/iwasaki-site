@@ -1,0 +1,9 @@
+---
+layout: base.njk
+key: thanks
+permalink: thanks.html
+eleventyExcludeFromCollections: true
+---
+{%- set d = cms.thanks -%}{%- set s = cms.site -%}
+{% include "phero.njk" %}<section class="sec"><div class="wrap"><div class="thanks rv"><div class="thanks-ic" aria-hidden="true"></div><h2 class="title">{{ d.body_title }}</h2><p>{{ d.body_text | br | safe }}</p>
+<div class="thanks-act"><a href="tel:{{ s.tel1 | replace('-', '') }}" class="btn btn-dark">電話で相談　{{ s.tel1 }}</a><a href="/" class="btn btn-ghost-d">トップページへ戻る<span class="arr">→</span></a></div></div></div></section>

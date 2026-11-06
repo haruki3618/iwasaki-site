@@ -1,0 +1,37 @@
+name: security
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 0 * * 1" # 毎週月曜 09:00（日本時間）。コードを触らなくても新しい脆弱性を検知する
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      # インストール時のスクリプト実行を止める（依存パッケージが改ざんされても、CI上で任意のコードが走らないように）
+      - run: npm ci --ignore-scripts
+      - name: 依存関係の脆弱性（high 以上で失敗）
+        run: npm run audit
+      - name: 管理画面の内容の検査
+        run: npm run validate
+      - name: ビルド
+        run: npx eleventy
+      - name: セキュリティヘッダーの検査
+        run: npm run headers:check
+      - name: Decap CMS の SRI 検査
+        run: npm run sri:check

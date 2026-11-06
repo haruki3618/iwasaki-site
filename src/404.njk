@@ -1,0 +1,10 @@
+---
+layout: base.njk
+key: notfound
+permalink: 404.html
+eleventyExcludeFromCollections: true
+---
+{%- set d = cms.notfound -%}{%- set s = cms.site -%}
+{% include "phero.njk" %}<section class="sec"><div class="wrap"><div class="thanks nf rv"><h2 class="title">{{ d.body_title }}</h2><p>{{ d.body_text | br | safe }}</p>
+<ul class="nf-links"><li><a href="/shinchiku">新築</a></li><li><a href="/reform">リフォーム</a></li><li><a href="/services">解体・白蟻・外構</a></li><li><a href="/company">会社概要</a></li><li><a href="/staff">スタッフ</a></li></ul>
+<div class="thanks-act"><a href="/" class="btn btn-dark">トップページへ戻る<span class="arr">→</span></a><a href="tel:{{ s.tel1 | replace('-', '') }}" class="btn btn-ghost-d">電話で相談　{{ s.tel1 }}</a></div></div></div></section>

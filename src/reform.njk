@@ -1,8 +1,8 @@
 ---
 layout: base.njk
 key: reform
-topic: リフォーム
+topic: reform
 permalink: reform.html
 ---
-{%- set d = cms.reform -%}{%- set s = cms.site -%}{%- set cta_topic = "リフォーム" -%}{%- set cta_btn = "無料相談・お見積りはこちら" -%}
-{% include "phero.njk" %}<section class="sec"><div class="wrap">{% for b in d.blocks %}<div class="dr{% if loop.index0 % 2 == 1 %} rev{% endif %}"><div class="dr-img rv">{% img b.image, b.alt %}</div><div class="rv d1"><div class="label">{{ b.label }}</div><h2>{{ b.title }}</h2><p>{{ b.text }}</p>{% if b.checks.length %}<ul class="checks">{% for c in b.checks %}<li>{{ c }}</li>{% endfor %}</ul>{% endif %}</div></div>{% endfor %}{% include "cta.njk" %}</div></section>
+{%- set d = cms.reform -%}{%- set s = cms.site -%}{%- set cta_topic = "reform" -%}{%- set cta_btn = "無料相談・お見積りはこちら" -%}
+{% include "phero.njk" %}<section class="sec"><div class="wrap">{% for b in d.blocks %}<div class="dr{% if loop.index0 % 2 == 1 %} rev{% endif %}"><div class="dr-img rv">{% img b.image, b.alt, "", false, "(max-width:900px) 100vw, 526px" %}</div><div class="rv d1"><div class="label">{{ b.label }}</div><h2>{{ b.title }}</h2><p>{{ b.text }}</p>{% if b.checks.length %}<ul class="checks">{% for c in b.checks %}<li>{{ c }}</li>{% endfor %}</ul>{% endif %}</div></div>{% endfor %}{% include "cta.njk" %}</div></section>

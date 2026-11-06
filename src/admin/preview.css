@@ -1,0 +1,17 @@
+/* 管理画面のプレビュー用（サイトの style.css に、プレビューだけの調整を足しています） */
+body{background:var(--paper)}
+.prv .hero{min-height:560px}
+.prv .hero .wrap{padding-top:90px}
+.prv .hero h1{font-size:clamp(2rem,5vw,3.2rem)}
+.prv .btn{cursor:default}
+.prv .bc,.prv .inos{pointer-events:none}
+.prv .sec{padding:64px 0}
+.prv-note{padding:24px;color:var(--ink-2);font-size:.9rem}
+.prv .on-dark-note{color:rgba(255,255,255,.6);padding-left:0}
+.prv-none{padding:48px 28px;font-family:"Hiragino Sans","Yu Gothic",sans-serif;color:#555;line-height:1.9}
+.prv-none p{margin-bottom:12px}
+/* プレビューは幅がせまいので、数字の帯だけは横3つのまま見せる */
+.prv .ribbon .wrap{grid-template-columns:repeat(3,1fr);max-width:none}
+.prv .rb{border-top:0;border-left:1px solid var(--line);padding:22px 20px;flex-direction:column;gap:6px;align-items:flex-start}
+.prv .rb:first-child{border-left:0}
+.prv .rb b{font-size:2rem}

@@ -1,3 +1,6 @@
+// セキュリティヘッダーは src/_headers.njk（出力 _site/_headers）が、静的ファイルの配信時に付けます。
+// 存在しないURLは、作られた 404.html（src/404.njk）を404の状態で返します（not_found_handling）。
+// /api/* は run_worker_first で worker/index.js が先に処理するので、そちらのヘッダーは worker/index.js で付けています。
 {
   "name": "iwasaki-site",
   "main": "worker/index.js",
@@ -5,6 +8,7 @@
   "assets": {
     "directory": "./_site",
     "binding": "ASSETS",
+    "not_found_handling": "404-page",
     "run_worker_first": ["/api/*"]
   }
 }

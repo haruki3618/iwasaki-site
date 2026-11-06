@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded',function(){
   });
   nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){close();bg.focus()}});
-  window.addEventListener('resize',function(){if(innerWidth>1180)close()});
+  window.addEventListener('resize',function(){if(innerWidth>1040)close()});
   var mb=document.getElementById('mbar'),ct=document.getElementById('contact');
   if(mb){
     var ctVisible=false;
@@ -33,12 +33,23 @@ document.addEventListener('DOMContentLoaded',function(){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
     els.forEach(function(el){io.observe(el)});
   }else els.forEach(function(el){el.classList.add('in')});
+  /* ?topic=キー（例 shinchiku）で相談内容を選んでおく。古い形（?topic=リフォーム のような文言）も受け付ける */
   var tp=new URLSearchParams(location.search).get('topic'),sel=document.getElementById('topic');
-  if(tp&&sel){for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===tp){sel.selectedIndex=i;break}}}
+  if(tp&&sel){for(var i=0;i<sel.options.length;i++){if(sel.options[i].getAttribute('data-key')===tp||sel.options[i].text===tp){sel.selectedIndex=i;break}}}
+  /* 電話番号かメールアドレスの、どちらか一方は必須 */
+  var ph=document.getElementById('phone'),em=document.getElementById('email');
+  if(ph&&em){
+    var need=function(){em.setCustomValidity((ph.value.trim()||em.value.trim())?'':'電話番号かメールアドレスのどちらかをご入力ください')};
+    ph.addEventListener('input',need);em.addEventListener('input',need);need();
+  }
   var cf=document.getElementById('cform');
-  if(cf){var sb=cf.querySelector('button[type=submit]'),sl=sb&&sb.firstChild.nodeValue;
-    cf.addEventListener('submit',function(){if(sb&&cf.checkValidity()){sb.disabled=true;sb.setAttribute('aria-busy','true');sb.firstChild.nodeValue='送信中…'}});
+  if(cf){var sb=cf.querySelector('button[type=submit]'),sl=sb&&sb.firstChild.nodeValue,hp=document.getElementById('hp_note');
+    cf.addEventListener('submit',function(e){
+      /* 迷惑送信（ボット）対策：人には見えない欄に何か入っていたら、送らずに完了ページへ。空なら、その欄は送信しない */
+      if(hp){if(hp.value){e.preventDefault();location.replace('/thanks');return}hp.disabled=true}
+      if(sb&&cf.checkValidity()){sb.disabled=true;sb.setAttribute('aria-busy','true');sb.firstChild.nodeValue='送信中…'}
+    });
     /* 送信後にブラウザの「戻る」で戻ってもボタンが固まらないように */
-    window.addEventListener('pageshow',function(e){if(e.persisted&&sb){sb.disabled=false;sb.removeAttribute('aria-busy');sb.firstChild.nodeValue=sl}});
+    window.addEventListener('pageshow',function(e){if(e.persisted){if(hp)hp.disabled=false;if(sb){sb.disabled=false;sb.removeAttribute('aria-busy');sb.firstChild.nodeValue=sl}}});
   }
 });
