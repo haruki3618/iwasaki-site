@@ -1,9 +1,12 @@
 {
   "zip": "935-0025",
   "area_served": "富山県氷見市",
-  "hours_close": "",
-  "holiday_extra": "",
-  "closed_days": [],
+  "hours_close": "17:30",
+  "holiday_extra": "祝日・年末年始・お盆",
+  "closed_days": [
+    "Monday",
+    "Friday"
+  ],
   "tel1_label": "イワサキ住建",
   "logo": "/images/icon.avif",
   "name": "イワサキ住建 / ハウジングひみ",
@@ -21,7 +24,7 @@
   "tel2": "0766-72-8611",
   "short_description": "富山県氷見市の工務店。新築・リフォーム・解体・白蟻対策・外構まで一貫対応。",
   "inos_url": "https://www.inos-ie.com/",
-  "hours_open": "",
+  "hours_open": "8:30",
   "founding_year": "1991",
   "slogan": "暮らしに、笑顔を建てる。"
 }
