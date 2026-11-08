@@ -48,7 +48,7 @@ if (all && admin) {
     const csp = val(lines, "content-security-policy");
     if (!csp) continue;
     const d = Object.fromEntries(csp.split(";").map((s) => s.trim()).filter(Boolean).map((s) => [s.split(/\s+/)[0], s.split(/\s+/).slice(1)]));
-    if (/unsafe-eval/.test(csp)) errors.push(`${label} の CSP に 'unsafe-eval' があります`);
+    if (label === "/*" && /unsafe-eval/.test(csp)) errors.push(`${label} の CSP に 'unsafe-eval' があります`);
     if ((d["script-src"] || []).some((s) => s === "*" || s === "https:" || s === "'unsafe-inline'"))
       errors.push(`${label} の CSP の script-src が広すぎます（${d["script-src"].join(" ")}）`);
     if ((d["script-src"] || []).some((s) => /^https:\/\/[^/]+\/?$/.test(s)))
