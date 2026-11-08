@@ -48,9 +48,7 @@ if (all && admin) {
     const csp = val(lines, "content-security-policy");
     if (!csp) continue;
     const d = Object.fromEntries(csp.split(";").map((s) => s.trim()).filter(Boolean).map((s) => [s.split(/\s+/)[0], s.split(/\s+/).slice(1)]));
-    // 管理画面の Decap CMS は eval を使うため、/admin/* だけは 'unsafe-eval' を許可する。公開サイト（/*）には付けない
-    if (/unsafe-eval/.test(csp) && label !== "/admin/*") errors.push(`${label} の CSP に 'unsafe-eval' があります`);
-    if (label === "/admin/*" && !/unsafe-eval/.test(csp)) errors.push(`${label} の CSP に 'unsafe-eval' がありません（管理画面の Decap CMS が「Error loading the CMS configuration」で開けなくなります）`);
+    if (/unsafe-eval/.test(csp)) errors.push(`${label} の CSP に 'unsafe-eval' があります`);
     if ((d["script-src"] || []).some((s) => s === "*" || s === "https:" || s === "'unsafe-inline'"))
       errors.push(`${label} の CSP の script-src が広すぎます（${d["script-src"].join(" ")}）`);
     if ((d["script-src"] || []).some((s) => /^https:\/\/[^/]+\/?$/.test(s)))
